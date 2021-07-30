@@ -1,13 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
 
+$fontfamily: "Roboto", sans-serif;
+$lightBorderColor:rgb(227, 227, 230);
 
-$fontfamily:'Roboto', sans-serif;
-
-
-body{
-    font-family: $fontfamily;
+body,
+.p-component {
+    font-family: $fontfamily !important;
 }
 
 .p-button:enabled:focus {
-    box-shadow:none !important;
+    box-shadow: none !important;
+}
+
+.p-slidemenu {
+    min-width: 18rem !important;
+
+    ul {
+        width: 100% !important;
+        :first-of-type a{
+          font-weight: bold !important;
+        }
+        li{
+            border-bottom: 1px solid $lightBorderColor !important;
+            font-size: 0.8rem;
+        }
+    }
+    .p-slidemenu-content {
+        min-height: 322px !important;
+    }
+}
+ 
+.p-paginator{
+    padding: 0.5rem 0.2rem;
+    button.p-paginator-first, button.p-paginator-last{
+        display: none !important;
+    }
+   .p-paginator-pages .p-paginator-page.p-highlight {
+        background:  var(--blue-500) !important;
+        border-color:  var(--blue-500) !important;
+        color: white !important;
+    }
 }
