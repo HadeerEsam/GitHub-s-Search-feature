@@ -1,20 +1,27 @@
-   <!-- search component in pages/search-->
-   <app-search></app-search>
+<!-- search component in pages/search-->
+<app-search></app-search>
+
 <section class="lg:w-7 md:w-10 w-full m-auto">
-    <div *ngIf="errMsg" class="err py-6 my-6 text-center font-bold text-pink-600 text-xl">
+    <!-- error section  -->
+    <section *ngIf="errMsg" class="err py-6 my-6 text-center font-bold text-pink-600 text-xl">
         {{errMsg}}
-    </div>
-   <div *ngIf="loading">
-    <div  class="flex justify-content-between" *ngFor="let s of skeleton">
-        <!-- <p-progressSpinner ></p-progressSpinner> -->
-        <p-skeleton shape="circle" size="50px"></p-skeleton>
-        <div class="col">
-            <p-skeleton shape="Rectangle" width="90%" height="1.3rem" ></p-skeleton>
-            <p-skeleton shape="Rectangle" width="50%" height="1rem"></p-skeleton>
+    </section>
+
+    <!-- skeleton part to show until data recieve -->
+    <section *ngIf="loading">
+        <div class="flex justify-content-between" *ngFor="let s of skeleton">
+            <p-skeleton shape="circle" size="50px"></p-skeleton>
+            <div class="col">
+                <p-skeleton shape="Rectangle" width="90%" height="1.3rem"></p-skeleton>
+                <p-skeleton shape="Rectangle" width="50%" height="1rem"></p-skeleton>
+            </div>
         </div>
-    </div>
-   </div>
-    <div *ngIf="!loading && !errMsg" class="search-result">
+    </section>
+
+    <!-- section of data search results -->
+    <section *ngIf="!loading && !errMsg" class="search-result">
+
+        <!-- showing total number of users and sort menu -->
         <div id="search-header" class="flex justify-content-between  pb-3">
             <h3 class="m-0">{{totalUserResults |number}} users</h3>
             <p-slideMenu #menu [model]="sortItems" [popup]="true"></p-slideMenu>
@@ -24,10 +31,27 @@
                         style="font-size: 0.8rem"></i></small>
             </button>
         </div>
+
+        <!-- showing search results of users and their info -->
         <div id="user-result">
             <div class=" flex  py-3 border-top-1 border-gray-300" *ngFor="let user of userResults">
-                <a [href]="user.html_url" class=" w-2rem "><img [src]="user.avatar_url" alt="user profile image"
-                        class=" w-full border-circle"></a>
+
+                <div class="user-img w-2rem"  >
+                    <a class="main-img"  [href]="user.html_url"><img [src]="user.avatar_url" alt="user profile image"
+                            class=" w-full border-circle"></a>
+                    <div class="overlay-info  py-3 px-2 border-1 border-gray-300 shadow-1 border-round" >
+                        <div class="w-4rem"><img [src]="user.avatar_url" alt="user profile image" class=" w-full border-circle"></div>
+                        <div class="col">
+                            <a *ngIf="user.name" [href]="user.html_url" class="mr-3 text-primary">{{user.name}}</a>
+                            <div class="details">
+                                <p>{{user.bio}}</p>
+                                <div>
+                                    <small class="text-600">{{user.location}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="userInfo col">
                     <div class="flex justify-content-between">
                         <div class="name">
@@ -48,8 +72,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <p-paginator *ngIf="!errMsg" #paginator [rows]="10" [totalRecords]="totalUserResults>1000?1000:totalUserResults"
-        (onPageChange)="paginate($event)" class="px-1"></p-paginator>
+        (onPageChange)="paginate($event)"  class="px-1"></p-paginator>
 </section>
