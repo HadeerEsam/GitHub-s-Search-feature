@@ -11,6 +11,7 @@ import { UsersComponent } from './pages/users/users.component';
 import {SlideMenuModule} from 'primeng/slidemenu';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {PaginatorModule} from 'primeng/paginator';
+import {SkeletonModule} from 'primeng/skeleton';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import {PaginatorModule} from 'primeng/paginator';
     FormsModule,
     SlideMenuModule,
     BrowserAnimationsModule,
-    PaginatorModule
+    PaginatorModule,
+    SkeletonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
