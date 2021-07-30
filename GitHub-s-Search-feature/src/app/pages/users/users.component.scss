@@ -1,10 +1,36 @@
 
-.name{
-    a{
+    a {
         text-decoration: none;
     }
-    a:hover{
+    a:hover {
         text-decoration: underline;
     }
-    
+
+.user-img {
+    position: relative;
+    .overlay-info {
+        display: none;
+        position: absolute;
+        top: 30%;
+        min-width: 400px;
+        background-color: white;
+        z-index: 300;
+        ::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 10px;
+            // z-index: 300;
+            // background-color: white;
+            width: 5px;
+            height:10px;
+            color: #E0E0E0;
+            border-style: solid;
+            border-width: 5px;
+            border-color:  transparent  transparent white transparent;
+        }
+    }
+}
+.user-img:hover .overlay-info {
+    display: flex;
 }
