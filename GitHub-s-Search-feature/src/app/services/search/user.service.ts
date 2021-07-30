@@ -11,7 +11,7 @@ export class UserService {
     private http:HttpClient
   ) { }
 
-  getUsers(query:string, page:number=1):Observable <any>{
-   return this.http.get(`${this.API_url}/search/users?page=${page}&q=${query}&per_page=10`) ;
+  getUsers(query:string, page?:number,sort?:string,order?:string):Observable <any>{
+   return this.http.get(`${this.API_url}/search/users?page=${page}&q=${query}&sort=${sort}&order=${order}&per_page=10`) ;
   }
 }
