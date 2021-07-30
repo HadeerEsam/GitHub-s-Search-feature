@@ -1,5 +1,20 @@
-<section  class="lg:w-7 md:w-10 w-full m-auto py-6">
-    <div *ngIf="!loading" class="search-result">
+   <!-- search component in pages/search-->
+   <app-search></app-search>
+<section class="lg:w-7 md:w-10 w-full m-auto">
+    <div *ngIf="errMsg" class="err py-6 my-6 text-center font-bold text-pink-600 text-xl">
+        {{errMsg}}
+    </div>
+   <div *ngIf="loading">
+    <div  class="flex justify-content-between" *ngFor="let s of skeleton">
+        <!-- <p-progressSpinner ></p-progressSpinner> -->
+        <p-skeleton shape="circle" size="50px"></p-skeleton>
+        <div class="col">
+            <p-skeleton shape="Rectangle" width="90%" height="1.3rem" ></p-skeleton>
+            <p-skeleton shape="Rectangle" width="50%" height="1rem"></p-skeleton>
+        </div>
+    </div>
+   </div>
+    <div *ngIf="!loading && !errMsg" class="search-result">
         <div id="search-header" class="flex justify-content-between  pb-3">
             <h3 class="m-0">{{totalUserResults |number}} users</h3>
             <p-slideMenu #menu [model]="sortItems" [popup]="true"></p-slideMenu>
@@ -22,7 +37,7 @@
                         <div class="followers text-600">
                             <strong class="text-800">{{user.followers |number}}</strong> Followers
                         </div>
-    
+
                     </div>
                     <div class="details">
                         <p>{{user.bio}}</p>
@@ -34,5 +49,7 @@
             </div>
         </div>
     </div>
-    <p-paginator [rows]="10" [totalRecords]="totalUserResults>1000?1000:totalUserResults" (onPageChange)="paginate($event)" class="px-1"></p-paginator>
+
+    <p-paginator *ngIf="!errMsg" #paginator [rows]="10" [totalRecords]="totalUserResults>1000?1000:totalUserResults"
+        (onPageChange)="paginate($event)" class="px-1"></p-paginator>
 </section>
