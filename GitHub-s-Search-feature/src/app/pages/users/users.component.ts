@@ -34,16 +34,20 @@ export class UsersComponent implements OnInit {
   ) {
     // get query params values
     this.activeRoute.queryParams
-      .subscribe(params => {
-        if (params.length == 1) {
-          this.paginator.first = 0;
+      .subscribe( params => {
+        if (Object.keys(params).length == 1) {
           this.page = 1;
           this.sortKey = "Best match";
           this.sortType = "";
           this.orderType = "desc";
+          setTimeout(() => {
+            this.paginator.changePage(0);
+          }, 0); 
         }
         this.searchQuery = params.q;
-        this.getUserResults();
+        if(Object.keys(params).length >1){
+          this.getUserResults();
+        }
       }
       );
   }
